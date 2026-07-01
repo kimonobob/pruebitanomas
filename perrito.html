@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perritos uwu 🐶</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(135deg, #ffe0c7 0%, #ffd1dc 50%, #d7c9ff 100%);
+      color: #5a4a6a;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 6px;
+      text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.6);
+      text-align: center;
+    }
+
+    .subtitulo {
+      margin-bottom: 24px;
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      width: 100%;
+    }
+
+    .tarjeta {
+      background: #fff;
+      padding: 14px;
+      border-radius: 24px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .tarjeta:hover {
+      transform: translateY(-6px) rotate(-1deg);
+    }
+
+    .tarjeta img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+      background: #f3eaff;
+    }
+
+    .tarjeta p {
+      margin-top: 12px;
+      font-size: 1.1rem;
+    }
+
+    .boton {
+      margin-top: 28px;
+      border: none;
+      cursor: pointer;
+      padding: 14px 28px;
+      font-size: 1.2rem;
+      font-family: inherit;
+      color: #fff;
+      background: linear-gradient(135deg, #ff8fb1, #b28bff);
+      border-radius: 999px;
+      box-shadow: 0 8px 20px rgba(178, 139, 255, 0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .boton:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 26px rgba(178, 139, 255, 0.5);
+    }
+
+    .boton:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .corazones {
+      font-size: 1.6rem;
+      margin-top: 22px;
+      animation: latido 1.2s infinite;
+    }
+
+    @keyframes latido {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+  </style>
+</head>
+<body>
+  <h1>¡Hola perritos! uwu 🐶</h1>
+  <p class="subtitulo">Una carga de lomitos adorables para alegrarte el día 🐾</p>
+
+  <div class="galeria" id="galeria">
+    <!-- Las tarjetas se generan con JavaScript -->
+  </div>
+
+  <button class="boton" id="botonCambiar">✨ ¡Otros perritos! ✨</button>
+
+  <div class="corazones">💖 uwu 💖</div>
+
+  <script>
+    const frases = [
+      'Guau guau 🐾',
+      '¿Me das una galletita? 🍪',
+      'Soy un buen chico 🥰',
+      'uwu the doggo',
+      '¡Vamos a pasear! 🦴',
+      'Cachorrito feliz ✨'
+    ];
+
+    const galeria = document.getElementById('galeria');
+    const boton = document.getElementById('botonCambiar');
+    const CANTIDAD = 6;
+
+    function urlPerrito() {
+      // dog.ceo entrega una imagen aleatoria; el timestamp evita la caché
+      return 'https://placedog.net/440/300?random&t=' + Math.random();
+    }
+
+    function fraseAleatoria() {
+      return frases[Math.floor(Math.random() * frases.length)];
+    }
+
+    function crearTarjeta() {
+      const tarjeta = document.createElement('div');
+      tarjeta.className = 'tarjeta';
+
+      const img = document.createElement('img');
+      img.src = urlPerrito();
+      img.alt = 'Un perrito adorable uwu';
+      img.loading = 'lazy';
+
+      const texto = document.createElement('p');
+      texto.textContent = fraseAleatoria();
+
+      tarjeta.appendChild(img);
+      tarjeta.appendChild(texto);
+      return tarjeta;
+    }
+
+    function cargarPerritos() {
+      galeria.innerHTML = '';
+      for (let i = 0; i < CANTIDAD; i++) {
+        galeria.appendChild(crearTarjeta());
+      }
+    }
+
+    boton.addEventListener('click', cargarPerritos);
+    cargarPerritos();
+  </script>
+</body>
+</html>
